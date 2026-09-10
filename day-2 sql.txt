@@ -1,0 +1,551 @@
+Enter password: ***************
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 22
+Server version: 9.2.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW DATABASE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DATABASE' at line 1
+mysql> CREATE DATABASE PFS6;
+Query OK, 1 row affected (0.07 sec)
+
+mysql> SHOW DATABASE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DATABASE' at line 1
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| lab_records        |
+| mysql              |
+| performance_schema |
+| pfs6               |
+| sys                |
++--------------------+
+6 rows in set (0.02 sec)
+
+mysql> CREATE SCHEMA DA6;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| da6                |
+| information_schema |
+| lab_records        |
+| mysql              |
+| performance_schema |
+| pfs6               |
+| sys                |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> DROP DATABASE PFS6;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| da6                |
+| information_schema |
+| lab_records        |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+6 rows in set (0.02 sec)
+
+mysql> DROP SCHEMA DA6;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| lab_records        |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> CREATE TABLE EMPLOYEES(
+    -> EMPID CHAR(5),
+    -> FNAME VARCHAR(100),
+    -> LNAME VARCHAR(70)
+    ->
+    -> ^C
+mysql> CREATE TABLE EMPLOYEES(
+    -> EMPID CHAR(5)
+    -> FNAME VARCHAR(100)^C
+mysql> USE PFS6;
+ERROR 1049 (42000): Unknown database 'pfs6'
+mysql> CREATE TABLE EMPLOYEES(
+    -> EMPID CHAR(5),
+    -> FNAME VARCHAR(100),
+    -> LNAME VARCHAR(70),
+    -> AGE INT,
+    -> DOJ DATE,
+    -> ADDRESS TINYTEXT,
+    -> DEPT VARCHAR(20)
+    -> );
+ERROR 1046 (3D000): No database selected
+mysql> USE PFS6;
+ERROR 1049 (42000): Unknown database 'pfs6'
+mysql> CREATE DATABASE PFS6;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| lab_records        |
+| mysql              |
+| performance_schema |
+| pfs6               |
+| sys                |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> CREATE TABLE EMPLOYEES(
+    -> EMPID CHAR(5),
+    -> FNAME VARCHAR(100),
+    -> F
+    -> ^C
+mysql>  CREATE TABLE EMPLOYEES(
+    ->     -> EMPID CHAR(5),
+    ->     -> FNAME VARCHAR(100),
+    ->     -> LNAME VARCHAR(70),
+    ->     -> AGE INT,
+    ->     -> DOJ DATE,
+    ->     -> ADDRESS TINYTEXT,
+    ->     -> DEPT VARCHAR(20)
+    ->     -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> EMPID CHAR(5),
+    -> FNAME VARCHAR(100),
+    -> LNAME VARCHAR(70),
+    -> AG' at line 2
+mysql> USE PFS6;
+Database changed
+mysql> CREATE TABLE EMPLOYEES(
+    ->     ->     -> EMPID CHAR(5),
+    ->     ->     -> FNAME VARCHAR(100),
+    ->     ->     -> LNAME VARCHAR(70),
+    ->     ->     -> AGE INT,
+    ->     ->     -> DOJ DATE,
+    ->     ->     -> ADDRESS TINYTEXT,
+    ->     ->     -> DEPT VARCHAR(20)
+    ->     ->     -> )^C
+mysql> CREATE TABLE EMPLOYEES(
+    -> EMPID CHAR(5),
+    -> FNAME VARCHAR(100),
+    -> LNAME VARCHAR(70),
+    -> AGE INT,
+    -> DOJ DATE,
+    -> ADDRESS TINYTEXT,
+    -> DEPT VARCHAR(20)
+    -> );
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> DEC EMPLOYEES;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DEC EMPLOYEES' at line 1
+mysql> DECS EMPLOYEE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DECS EMPLOYEE' at line 1
+mysql> SHOW COLUMNS FROM EMPLOYEES;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| EMPID   | char(5)      | YES  |     | NULL    |       |
+| FNAME   | varchar(100) | YES  |     | NULL    |       |
+| LNAME   | varchar(70)  | YES  |     | NULL    |       |
+| AGE     | int          | YES  |     | NULL    |       |
+| DOJ     | date         | YES  |     | NULL    |       |
+| ADDRESS | tinytext     | YES  |     | NULL    |       |
+| DEPT    | varchar(20)  | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+7 rows in set (0.02 sec)
+
+mysql> modify the fname column in employees ^C
+mysql> --modify the fname column in employees table to varchar(70)
+    -> --syntax : alter table table-name modity column-name datatype size
+    -> ALTER TABLE EMPLOYEES MODIFY FNAME VARCHAR(70);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--modify the fname column in employees table to varchar(70)
+--syntax : alter tab' at line 1
+mysql> --modify the fname column in employees table to varchar(70)
+    -> ^C
+mysql> -- modify the fname column in employees table to varchar(70)
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> -- modify the fname column in employees table to varchar(70)
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> ^C
+mysql> -- modify the fname column in employees table to varchar(70)
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> -- syntax : alter table table-name modify column-name datatype size
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> alter table employees modify fname varchar(70);
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employees;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| EMPID   | char(5)     | YES  |     | NULL    |       |
+| fname   | varchar(70) | YES  |     | NULL    |       |
+| LNAME   | varchar(70) | YES  |     | NULL    |       |
+| AGE     | int         | YES  |     | NULL    |       |
+| DOJ     | date        | YES  |     | NULL    |       |
+| ADDRESS | tinytext    | YES  |     | NULL    |       |
+| DEPT    | varchar(20) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+7 rows in set (0.02 sec)
+
+mysql> alter table employees modify lname varchar(100);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employees;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| EMPID   | char(5)      | YES  |     | NULL    |       |
+| fname   | varchar(70)  | YES  |     | NULL    |       |
+| lname   | varchar(100) | YES  |     | NULL    |       |
+| AGE     | int          | YES  |     | NULL    |       |
+| DOJ     | date         | YES  |     | NULL    |       |
+| ADDRESS | tinytext     | YES  |     | NULL    |       |
+| DEPT    | varchar(20)  | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+7 rows in set (0.02 sec)
+
+mysql> add a new column name with location toemployees table
+    -> ^C
+mysql> add a new column name with location toemployees table^C
+mysql> -- add a new column name with location to employees table
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> --syntax : after table table-name add cplumn-name datatype (size);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--syntax : after table table-name add cplumn-name datatype (size)' at line 1
+mysql> ALTER TABLE EMPLOYEES ADD LOCATION TINYTEXT;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEES;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| EMPID    | char(5)      | YES  |     | NULL    |       |
+| fname    | varchar(70)  | YES  |     | NULL    |       |
+| lname    | varchar(100) | YES  |     | NULL    |       |
+| AGE      | int          | YES  |     | NULL    |       |
+| DOJ      | date         | YES  |     | NULL    |       |
+| ADDRESS  | tinytext     | YES  |     | NULL    |       |
+| DEPT     | varchar(20)  | YES  |     | NULL    |       |
+| LOCATION | tinytext     | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> ALTER TABLE EMPLOYEES ADD PFID INT AFTER ADDRESS;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEES;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| EMPID    | char(5)      | YES  |     | NULL    |       |
+| fname    | varchar(70)  | YES  |     | NULL    |       |
+| lname    | varchar(100) | YES  |     | NULL    |       |
+| AGE      | int          | YES  |     | NULL    |       |
+| DOJ      | date         | YES  |     | NULL    |       |
+| ADDRESS  | tinytext     | YES  |     | NULL    |       |
+| PFID     | int          | YES  |     | NULL    |       |
+| DEPT     | varchar(20)  | YES  |     | NULL    |       |
+| LOCATION | tinytext     | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
+mysql> --HOW TO RENAME THE COLUMN NAME
+    -> --SYNTAX: ALTER TABLE TABLE-NAME CHANGE EXISTING COLUMN-NAME NEW COLUMN-NAME DATATYPE(SIZE);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--HOW TO RENAME THE COLUMN NAME
+--SYNTAX: ALTER TABLE TABLE-NAME CHANGE EXISTING' at line 1
+mysql> ALTER TABLE EMPLOYEES CHANGE FNAME FIRSTNAME VARCHAR(50);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEES;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| EMPID     | char(5)      | YES  |     | NULL    |       |
+| FIRSTNAME | varchar(50)  | YES  |     | NULL    |       |
+| lname     | varchar(100) | YES  |     | NULL    |       |
+| AGE       | int          | YES  |     | NULL    |       |
+| DOJ       | date         | YES  |     | NULL    |       |
+| ADDRESS   | tinytext     | YES  |     | NULL    |       |
+| PFID      | int          | YES  |     | NULL    |       |
+| DEPT      | varchar(20)  | YES  |     | NULL    |       |
+| LOCATION  | tinytext     | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
+mysql> ALTER TABLE EMPLOYEES CHANGE FLAME LASTNAME VARCHAR(30);
+ERROR 1054 (42S22): Unknown column 'FLAME' in 'employees'
+mysql> ALTER TABLE EMPLOYEES CHANGE LNAME LASTNAME VARCHAR(30);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEES;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| EMPID     | char(5)     | YES  |     | NULL    |       |
+| FIRSTNAME | varchar(50) | YES  |     | NULL    |       |
+| LASTNAME  | varchar(30) | YES  |     | NULL    |       |
+| AGE       | int         | YES  |     | NULL    |       |
+| DOJ       | date        | YES  |     | NULL    |       |
+| ADDRESS   | tinytext    | YES  |     | NULL    |       |
+| PFID      | int         | YES  |     | NULL    |       |
+| DEPT      | varchar(20) | YES  |     | NULL    |       |
+| LOCATION  | tinytext    | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
+mysql> ALTER TABLE COEGNAN_EMP TO EMPLOYEES;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TO EMPLOYEES' at line 1
+mysql> SHOW TABLES;
++----------------+
+| Tables_in_pfs6 |
++----------------+
+| codegnan_emp   |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> DROP TABLE EMPLOYEES;
+ERROR 1051 (42S02): Unknown table 'pfs6.employees'
+mysql> CREATE TABLE COMPANY STAFF;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'STAFF' at line 1
+mysql> SHOW TABLE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> CREATE TABLE COMPANY STAFF(
+    -> EMP ID INT,
+    -> AGE TINYINT,
+    -> EXPERIENCE SMALLINT,
+    -> GENDER CHAR(1),
+    -> EMP NAME VARCHAR(50),
+    -> ADDRESS TINYTEXT,
+    -> SALARY DECIMAL(10,2),
+    -> DEPARTMENT ENUM('HR','IT','SALES','FINANCE','SUPPORT'),
+    -> SKILLS SET('JAVA','PYTHON','SQL''EXCEL','COMMUNICATION'),
+    -> JOINING DATA
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'STAFF(
+EMP ID INT,
+AGE TINYINT,
+EXPERIENCE SMALLINT,
+GENDER CHAR(1),
+EMP NAME VA' at line 1
+mysql> DESC COMPANY_STAFF;
+ERROR 1146 (42S02): Table 'pfs6.company_staff' doesn't exist
+mysql> USE PFS6;
+Database changed
+mysql> DESC COMPANY_STAFF;
+ERROR 1146 (42S02): Table 'pfs6.company_staff' doesn't exist
+mysql> CREATE DATABASE COMPANY STAFF;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'STAFF' at line 1
+mysql> SHOW DATABASE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DATABASE' at line 1
+mysql> CREATE DATABASE COMPANY_STAFF;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| company_staff      |
+| information_schema |
+| lab_records        |
+| mysql              |
+| performance_schema |
+| pfs6               |
+| sys                |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> > CREATE TABLE COMPANY STAFF(
+    ->     -> EMP ID INT,
+    ->     -> AGE TINYINT,
+    ->     -> EXPERIENCE SMALLINT,
+    ->     -> GENDER CHAR(1),
+    ->     -> EMP NAME VARCHAR(50),
+    ->     -> ADDRESS TINYTEXT,
+    ->     -> SALARY DECIMAL(10,2),
+    ->     -> DEPARTMENT ENUM('HR','IT','SALES','FINANCE','SUPPORT'),
+    ->     -> SKILLS SET('JAVA','PYTHON','SQL''EXCEL','COMMUNICATION'),
+    ->     -> JOINING DATA
+    ->     -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '> CREATE TABLE COMPANY STAFF(
+    -> EMP ID INT,
+    -> AGE TINYINT,
+    -> EXPE' at line 1
+mysql> CREATE TABLE COMPANY_STAFF(
+    -> EMP ID INT,
+    -> AGE TINYINY,
+    -> EXPERIENCE SMALLINT,
+    -> GENDER CHAR(1),
+    -> EMP NAME VARCHAR(50),
+    -> ADDRESS TINYTEXT,
+    -> SALARY DECIMAL(10,2),
+    -> DEPARTMENT ENUM('HR','IT','SALES','FINANCE','SUPPORT'),
+    -> SKILLS SET('JAVA','PYTHON','SQL','EXCEL','COMMUNICATION'),
+    -> JOINING DATE
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ID INT,
+AGE TINYINY,
+EXPERIENCE SMALLINT,
+GENDER CHAR(1),
+EMP NAME VARCHAR(50),
+' at line 2
+mysql> ^C
+mysql> EMP ID INT,
+    -> AGE TINYINY,
+    -> EXPERIENCE SMALLINT,
+    -> ^C
+mysql> CREATE TABLE COMPANY_STAFF(
+    ->     -> GENDER CHAR(1),
+    -> ^C
+mysql> > CREATE TABLE COMPANY STAFF(
+    -> ^C
+mysql> CREATE TABLE COMPANY_STAFF(
+    -> EMP ID INT,
+    -> AGE TINYINT,
+    -> EXPERIENCE SMALLINT,
+    -> GENDER CHAR(1),
+    -> EMP NAME VARCHAR(50),
+    -> ADDRESS TINYTEXT,
+    -> SALARY DECIMAL(10,2),
+    -> DEPARTMENT ENUM('HR','IT','SALES','FINANCE','SUPPORT'^C
+mysql> CREATE TABLE COMPANY_STAFF(
+    -> EMPID INT,
+    -> AGE TINYINY,
+    -> EXPERIENCE SMALLINT,
+    -> GENDER CHAR(1),
+    -> EMPNAME VARCHAR(50),
+    -> ADDRESS TINYTEXT,
+    -> SALARY DECIMAL(10,2),
+    -> DEPARTMENT ENUM('HR','IT','SALES','FINANCE','SUPPORT'),
+    -> SKILLS SET('JAVA','PYTHON','SQL','EXCEL','COMMUNICATION'),
+    -> JOINING DATE
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TINYINY,
+EXPERIENCE SMALLINT,
+GENDER CHAR(1),
+EMPNAME VARCHAR(50),
+ADDRESS TINYT' at line 3
+mysql> CREATE TABLE COMPANY_STAFF(
+    -> EMP ID INT,
+    -> AGE TINYINT,
+    -> EXPERIENCE SMALLINT,
+    -> GENDER CHAR(1),
+    -> EMPNAME VARCHAR(50),
+    -> ADDRESS TINYTEXT,
+    -> SALARY DECIMAL(10,2),
+    -> DEPARTMENT ENUM('HR','IT','SALES','FINANCE','SUPPORT'),
+    -> SKILLS SET('JAVA','PYTHON','SQL','EXCEL','COMMUNICATION'),
+    -> JOINING DATE
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ID INT,
+AGE TINYINT,
+EXPERIENCE SMALLINT,
+GENDER CHAR(1),
+EMPNAME VARCHAR(50),
+A' at line 2
+mysql> CREATE TABLE COMPANY_STAFF(
+    -> EMPID INT,
+    -> AGE TINYINY,
+    -> EXPERIENCE SMALLINT,
+    -> GENDER CHAR(1),
+    -> EMPNAME VARCHAR(50),
+    -> ADDRESS TINYTEXT,
+    -> SALARY DECIMAL(10,2),
+    -> DEPARTMENT ENUM('HR','IT','SALES','FINANCE','SUPPORT'),
+    -> SKILLS SET('JAVA','PYTHON','SQL','EXCEL','COMMUNICATION'),
+    -> JOINING_DATE DATE
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TINYINY,
+EXPERIENCE SMALLINT,
+GENDER CHAR(1),
+EMPNAME VARCHAR(50),
+ADDRESS TINYT' at line 3
+mysql> CREATE TABLE COMPANY_STAFF(
+    -> EMPID INT,
+    -> AGE TINYINY,
+    -> EXPERIENCE SMALLINT,
+    -> GENDER CHAR(1),
+    -> EMPNAME VARCHAR(50),
+    -> ADDRESS TINYTEXT,
+    -> SALARY DECIMAL(10,2),
+    -> DEPARTMENT ENUM('HR','IT','SALES','FINANCE','SUPPORT'),
+    -> SKILLS SET('JAVA','PYTHON','SQL','EXCEL','COMMUNICATION'),
+    -> JOINING_DATE DATE
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TINYINY,
+EXPERIENCE SMALLINT,
+GENDER CHAR(1),
+EMPNAME VARCHAR(50),
+ADDRESS TINYT' at line 3
+mysql> CREATE TABLE COMPANY_STAFF(
+    -> EMPID INT,
+    -> AGE TINYINT,
+    -> EXPERIENCE SMALLINT,
+    -> GENDER CHAR(1),
+    -> EMPNAME VARCHAR(50),
+    -> ADDRESS TINYTEXT,
+    -> SALARY DECIMAL(10,2),
+    -> DEPARTMENT ENUM('HR','IT','SALES','FINANCE','SUPPORT'),
+    -> SKILLS SET('JAVA','PYTHON','SQL','EXCEL','COMMUNICATION'),
+    -> JOINING_DATE DATE
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> DESC COMPANY_SATFF;
+ERROR 1146 (42S02): Table 'pfs6.company_satff' doesn't exist
+mysql> desc company_staff;
++--------------+----------------------------------------------------+------+-----+---------+-------+
+| Field        | Type                                               | Null | Key | Default | Extra |
++--------------+----------------------------------------------------+------+-----+---------+-------+
+| EMPID        | int                                                | YES  |     | NULL    |       |
+| AGE          | tinyint                                            | YES  |     | NULL    |       |
+| EXPERIENCE   | smallint                                           | YES  |     | NULL    |       |
+| GENDER       | char(1)                                            | YES  |     | NULL    |       |
+| EMPNAME      | varchar(50)                                        | YES  |     | NULL    |       |
+| ADDRESS      | tinytext                                           | YES  |     | NULL    |       |
+| SALARY       | decimal(10,2)                                      | YES  |     | NULL    |       |
+| DEPARTMENT   | enum('HR','IT','SALES','FINANCE','SUPPORT')        | YES  |     | NULL    |       |
+| SKILLS       | set('JAVA','PYTHON','SQL','EXCEL','COMMUNICATION') | YES  |     | NULL    |       |
+| JOINING_DATE | date                                               | YES  |     | NULL    |       |
++--------------+----------------------------------------------------+------+-----+---------+-------+
+10 rows in set (0.00 sec)
+
+mysql>
+
+
+
+
+
+
