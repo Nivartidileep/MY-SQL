@@ -1,0 +1,131 @@
+                                                                        SQL
+MYSQL
+======
+full stack --> front end,back end
+
+Front end:-
+============
+front end is the visual and interactive layer of a website or application that users directly see and interact with through a web browser or mobile app
+It is also called the client side because it runs on the users 
+
+
+WHAT IS DATA
+==============
+raw facts or figures without context
+example : 101,malli,50000,hyd
+WHAT IS FIELD
+==================
+smallest unit of data in data base (colum name)
+ex:- em id,em salary , em no
+
+WHAT IS RECORD
+================
+collection of related fields(row/tuple)
+ex:- (101,'sunny,5000)
+
+WHAT IS DATA BASE
+=======================
+organized collection of related records stored together
+ex:- an employee data base containing all employee records
+
+CLIENT- SERVER- ARCHITECTURE
+============================
+THERE ARE THREE COMPONENTS:-
+==============================
+CLIENT: the role of the client in client server architecture is to send request to the server and get response from the server
+
+SERVER: server is a software the role of the server in client server architecture is to take request from the clients. if the request is valid request it will generate some response and we can handover that response to client. if the client request is not a valid request it will raise some errors status codes.
+
+PROTOCOL:-IT HAS a set of rules and regulations. the role of the protocol in client - server arch is to send request from client to server.
+
+============DATA MODELS IN DBMS============
+DEF : A data model defines hoe data is stored,organized,amd manipulated in a data base
+
+1. physical data model
+2. logical data model
+3. hierarchal data model
+4. network data model
+5. relational data model(RDMS)
+6. entity data model
+
+=========IDENTIFIERS==========
+
+* unly use = a -z ,A - Z,0-9,@,#
+* identifiers should not start with digit
+* spaces are not consider to declare identifiers
+* resrved words not considered to declare identifiers.
+* max length to declare identifiers is 15.
+
+SQL(STRUCTURED QUERY LANGUAGE)
+================================
+SQL is a standardised programming language specially designed for managing and manipulating relational data bases . it providesa declarative syntax that allowsuser to define what data they want retrive , insert , update or delete without specifying exactly how database should execute these operations
+=========SQL COMMANDS ===========
+DDL: DATA DEFINITION LANGUAGE
+--------------------------------
+defines and modifies the structure of database objects(tables , schemes , indexes)
+there are 5 types:-create, alter , drop,truncate,rename
+CREATE:
+==========
+creates a new database objects such as tables,database,views,indexes triggers...etc
+
+syntax :-CREATE DATABASE DATABASE-NAME;
+                        (OR)
+          CREATE SCHEMA schema-name;
+how to create table?
+------------------------
+create table table-name(
+column-name datatype(size) constraint,
+column - name datatype(size) constraint,
+column - name datatype(size) constraint,
+---------------------------------------------
+------------------------------------------------
+column -name datatype(size) constraint);
+
+ALTER:-
+==========
+by using alter command we can modify the existing table structure.
+
+
+
+
+DROP
+=======
+permanently delets and existing database objects(table,database,index,views)along with its data and structure/.
+how to drop database\schema/table
+---------------------
+syntax: drop database data-name;
+        drop schema schema-name;
+        drop table table-name:
+
+
+DML(DATA MANIPULATION LANGUAGE)
+-----------------------------------
+manages data stored within database objects(insert,update,delete)
+
+DCL(DATA CONTROL LANGUAGE)
+----------------------------
+manages permissions and access control on database objects
+
+TCL(TRANSACTION CONTROL LANGUAGE)
+---------------------------------------
+manages transaction to maintain data integrity.
+
+DQL(Data Query Language)
+---------------------------
+used to fetch/retrive data from the database.
+
+
+============DATA TYPES=============
+NUMERIC DATA TYPE
+STRING DATA
+
+
+ TYPE
+DATE AND TYME
+
+
+
+
+
+
+
