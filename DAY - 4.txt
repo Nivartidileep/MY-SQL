@@ -1,0 +1,496 @@
+                                         DAY - 4
+DML
+======
+INSERT
+==============
+SYNTAX: INSERT INTO TABLE_NAME(COLUMN-NAME1,COLUMN-NAME_2,...…….COLUMN-NAME N)
+VALUES(VALUE-1,VALUE-2,VALUE-3...……..VALUE-N)
+
+APPROACH-2
+INSERT INTO EMPLOYEES VALUES()
+AGAIN VALUES;
+
+=======UDATE=========
+SYNTAX:
+UPDATE TABLE-NAME SET COLUMN-NAME=VALUE WHERE SOME CONDITION;
+
+DELETE
+===========
+DELETE THE ROCORDS BASED ON SOME CONDITIONS
+SYNTAX :- DELETE FROM TABLE-NAME WHERE SOME CONDITION
+
+TRUNCATE
+=========
+REMOVES ALL RECORDS PRESENT IN TABLE
+SYNTAX : TRUMCATE TABLE TABLE-NAME;
+
+ DIFF BTW DROP/DEL/TRUNCATE
+
+1.DROP
+===========
+--> REMOVES THE TABLE OR OBJECT
+-->TABLE STRUCTURE+DATA DELETED
+---> TABLE STRUCTURE REMOVED
+---> PERFORMANCE IS SLOW(DUE TO FULL REMOVAL)
+
+2.DELETE
+---> REMOVES SPECIFIC ROWS FROMM A TABLE
+---> SPECIFIC ROWS(BASED ON CONDITION REMOVED
+---> TABLE STRUCTURE INTACT
+----> PERFORMANCE IS SLOWER (ROW-BY-ROW)
+
+3.TRUNCATE
+---> REMOVES ALL ROWS KEEPS STRUCTURE
+---> ALL ROWS DEL
+---> TABLE STRUCTURE INTACT
+----> PERFORMANCE IS FAST(BULK DELETION)
+
+
+mysql> use pfs6;
+Database changed
+mysql> SHOW TABLES;
++----------------+
+| Tables_in_pfs6 |
++----------------+
+| bhagya_details |
+| company_staff  |
+| employees      |
++----------------+
+3 rows in set (0.04 sec)
+
+mysql> CREATE TABLE EMPLOYEES(
+    -> EMPID CHAR(5) PRIMARY KEY,
+    -> FIRSTNAME VARCHAR(50),
+    -> LASTNAME VARCHAR(30),
+    -> AGE INT,
+    -> DOJ DATE,
+    -> ADDRESS TINYTEXT,
+    -> DEPT VARCHAR(20)
+    -> );
+ERROR 1050 (42S01): Table 'employees' already exists
+mysql> CREATE TABLE EMPLOYEE(
+    -> FIRSTNAME VARCHAR(50),
+    -> LASTNAME VARCHAR(30),
+    -> AGE INT,
+    -> DOJ DATE,
+    -> ADDRESS TINYTEXT,
+    -> DEPT VARCHAR(20)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> INSERT INTO EMPLOYEE(EMPID,FIRSTNAME,LASTNAME,AGE,DOJ,ADDRESS,DEPT)
+    -> VALUES
+    -> ('E0001','BHAGYA','SRI',27,'2024-03-20','HYD','TRAINING');
+ERROR 1054 (42S22): Unknown column 'EMPID' in 'field list'
+mysql> INSERT INTO EMPLOYEE(,FIRSTNAME,LASTNAME,AGE,DOJ,ADDRESS,DEPT);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',FIRSTNAME,LASTNAME,AGE,DOJ,ADDRESS,DEPT)' at line 1
+mysql> INSERT INTO EMPLOYEE(FIRSTNAME,LASTNAME,AGE,DOJ,ADDRESS,DEPT);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> INSERT INTO EMPLOYEE(FIRSTNAME,LASTNAME,AGE,DOJ,ADDRESS,DEPT)
+    -> VALUES
+    -> ('BHAGYA','SRI',27,'2024-03-20','HYD','TRAINING');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> SELECT*FROM EMPLOYEE;
++-----------+----------+------+------------+---------+----------+
+| FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT     |
++-----------+----------+------+------------+---------+----------+
+| BHAGYA    | SRI      |   27 | 2024-03-20 | HYD     | TRAINING |
++-----------+----------+------+------------+---------+----------+
+1 row in set (0.01 sec)
+
+mysql> INSERT INTO EMPLOYEE(FIRSTNAME,LASTNAME,AGE,DOJ,ADDRESS,DEPT)
+    -> VALUES
+    -> ('BHAVYA','SRI',28,'2025-04-19','HYD','TRAINING');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT*FROM EMPLOYEE;
++-----------+----------+------+------------+---------+----------+
+| FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT     |
++-----------+----------+------+------------+---------+----------+
+| BHAGYA    | SRI      |   27 | 2024-03-20 | HYD     | TRAINING |
+| BHAVYA    | SRI      |   28 | 2025-04-19 | HYD     | TRAINING |
++-----------+----------+------+------------+---------+----------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE('ARUN','KUMAR',23,'2026-04-19','VZG','COMPUTER');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''ARUN','KUMAR',23,'2026-04-19','VZG','COMPUTER')' at line 1
+mysql> INSERT INTO EMPLOYEE(FIRSTNAME,LASTNAME,AGE,DOJ,ADDRESS,DEPT)
+    -> VALUES
+    -> ('ARUN','KUMAR',20,'2026-04-19','VZG','TRAINING');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT*FROM EMPLOYEE;
++-----------+----------+------+------------+---------+----------+
+| FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT     |
++-----------+----------+------+------------+---------+----------+
+| BHAGYA    | SRI      |   27 | 2024-03-20 | HYD     | TRAINING |
+| BHAVYA    | SRI      |   28 | 2025-04-19 | HYD     | TRAINING |
+| ARUN      | KUMAR    |   20 | 2026-04-19 | VZG     | TRAINING |
++-----------+----------+------+------------+---------+----------+
+3 rows in set (0.00 sec)
+
+mysql> MERGE COLUMN(FIRSTNAME,LASTNAME);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'MERGE COLUMN(FIRSTNAME,LASTNAME)' at line 1
+mysql> ^C
+mysql> SELECT*FROM EMPLOYEE;
++-----------+----------+------+------------+---------+----------+
+| FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT     |
++-----------+----------+------+------------+---------+----------+
+| BHAGYA    | SRI      |   27 | 2024-03-20 | HYD     | TRAINING |
+| BHAVYA    | SRI      |   28 | 2025-04-19 | HYD     | TRAINING |
+| ARUN      | KUMAR    |   20 | 2026-04-19 | VZG     | TRAINING |
++-----------+----------+------+------------+---------+----------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE(FIRSTNAME,LASTNAME,AGE,DOJ,ADDRESS,DEPT)
+    -> VALUES
+    -> ('VENKATA','APPARAO',25,'2027-05-20','K.J.P','COMPUTER');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT*FROM EMPLOYEE;
++-----------+----------+------+------------+---------+----------+
+| FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT     |
++-----------+----------+------+------------+---------+----------+
+| BHAGYA    | SRI      |   27 | 2024-03-20 | HYD     | TRAINING |
+| BHAVYA    | SRI      |   28 | 2025-04-19 | HYD     | TRAINING |
+| ARUN      | KUMAR    |   20 | 2026-04-19 | VZG     | TRAINING |
+| VENKATA   | APPARAO  |   25 | 2027-05-20 | K.J.P   | COMPUTER |
++-----------+----------+------+------------+---------+----------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE(FIRSTNAME,AGE,DOJ,ADDRESS,DEPT)
+    -> VALUES
+    -> ('HARI',25,'2027-05-20','K.J.P','COMPUTER');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT*FROM EMPLOYEE;
++-----------+----------+------+------------+---------+----------+
+| FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT     |
++-----------+----------+------+------------+---------+----------+
+| BHAGYA    | SRI      |   27 | 2024-03-20 | HYD     | TRAINING |
+| BHAVYA    | SRI      |   28 | 2025-04-19 | HYD     | TRAINING |
+| ARUN      | KUMAR    |   20 | 2026-04-19 | VZG     | TRAINING |
+| VENKATA   | APPARAO  |   25 | 2027-05-20 | K.J.P   | COMPUTER |
+| HARI      | NULL     |   25 | 2027-05-20 | K.J.P   | COMPUTER |
++-----------+----------+------+------------+---------+----------+
+5 rows in set (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE(LASTNAME,DOJ,DEPT)
+    -> VALUES
+    -> ('HARI','2027-05-20','COMPUTER');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT*FROM EMPLOYEE;
++-----------+----------+------+------------+---------+----------+
+| FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT     |
++-----------+----------+------+------------+---------+----------+
+| BHAGYA    | SRI      |   27 | 2024-03-20 | HYD     | TRAINING |
+| BHAVYA    | SRI      |   28 | 2025-04-19 | HYD     | TRAINING |
+| ARUN      | KUMAR    |   20 | 2026-04-19 | VZG     | TRAINING |
+| VENKATA   | APPARAO  |   25 | 2027-05-20 | K.J.P   | COMPUTER |
+| HARI      | NULL     |   25 | 2027-05-20 | K.J.P   | COMPUTER |
+| NULL      | HARI     | NULL | 2027-05-20 | NULL    | COMPUTER |
++-----------+----------+------+------------+---------+----------+
+6 rows in set (0.00 sec)
+
+mysql> UPDATE EMPLOYEE SET FIRSTNAME='APPARAO' WHERE FIRSTNAME='ARUN';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT*FROM EMPLOYEE WHERE FIRSTNAME='ARUN';
+Empty set (0.01 sec)
+
+mysql> SELECT*FROM EMPLOYEE;
++-----------+----------+------+------------+---------+----------+
+| FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT     |
++-----------+----------+------+------------+---------+----------+
+| BHAGYA    | SRI      |   27 | 2024-03-20 | HYD     | TRAINING |
+| BHAVYA    | SRI      |   28 | 2025-04-19 | HYD     | TRAINING |
+| APPARAO   | KUMAR    |   20 | 2026-04-19 | VZG     | TRAINING |
+| VENKATA   | APPARAO  |   25 | 2027-05-20 | K.J.P   | COMPUTER |
+| HARI      | NULL     |   25 | 2027-05-20 | K.J.P   | COMPUTER |
+| NULL      | HARI     | NULL | 2027-05-20 | NULL    | COMPUTER |
++-----------+----------+------+------------+---------+----------+
+6 rows in set (0.00 sec)
+
+mysql> UPDATE EMPLOYEE SET LAST NAME='RAO' WHERE FIRST = 'NULL';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'NAME='RAO' WHERE FIRST = 'NULL'' at line 1
+mysql> UPDATE EMPLOYEE SET LAST NAME='RAO' WHERE FIRST='NULL';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'NAME='RAO' WHERE FIRST='NULL'' at line 1
+mysql> UPDATE EMPLOYEE SET LAST NAME='RAO' WHERE FIRSTNAME='NULL';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'NAME='RAO' WHERE FIRSTNAME='NULL'' at line 1
+mysql> UPDATE EMPLOYEE SET LAST NAME='HARI' WHERE FIRSTNAME='RAO';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'NAME='HARI' WHERE FIRSTNAME='RAO'' at line 1
+mysql> UPDATE EMPLOYEE SET FIRSTNAME='HARI' WHERE LASTNAME='RAO';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET AGE = 50 WHERE AGE IS NULL;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT*FROM EMPLOYEE;
++-----------+----------+------+------------+---------+----------+
+| FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT     |
++-----------+----------+------+------------+---------+----------+
+| BHAGYA    | SRI      |   27 | 2024-03-20 | HYD     | TRAINING |
+| BHAVYA    | SRI      |   28 | 2025-04-19 | HYD     | TRAINING |
+| APPARAO   | KUMAR    |   20 | 2026-04-19 | VZG     | TRAINING |
+| VENKATA   | APPARAO  |   25 | 2027-05-20 | K.J.P   | COMPUTER |
+| HARI      | NULL     |   25 | 2027-05-20 | K.J.P   | COMPUTER |
+| NULL      | HARI     |   50 | 2027-05-20 | NULL    | COMPUTER |
++-----------+----------+------+------------+---------+----------+
+6 rows in set (0.00 sec)
+
+mysql> UPDATE EMPLOYEE SET LASTNAME = 'KRISHNA' WHERE FIRSTNAME = 'HARI;
+    '> UPDATE EMPLOYEE SET LASTNAME = 'KRISHNA' WHERE FIRSTNAME = 'HARI;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'KRISHNA' WHERE FIRSTNAME = 'HARI' at line 2
+mysql> SELECT*FROM EMPLOYEE;^C
+mysql> UPDATE EMPLOYEE SET LASTNAME = 'KRISHNA' WHERE FIRSTNAME = 'HARI;
+    '> ^C
+mysql> UPDATE EMPLOYEE SET LASTNAME='KRISHNA' WHERE FIRSTNAME='HARI';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET DOJ=2026-09-04 WHERE DOJ= 2027-05-20;
+ERROR 1292 (22007): Incorrect date value: '2002' for column 'DOJ' at row 1
+mysql> UPDATE EMPLOYEE SET DOJ=2026-09-04 WHERE DOJ IS 2027-05-20;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2027-05-20' at line 1
+mysql> UPDATE EMPLOYEE SET DOJ='2026-09-04'WHERE DOJ IS '2027-05-20';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''2027-05-20'' at line 1
+mysql> UPDATE EMPLOYEE SET DOJ='2026-09-04' WHERE DOJIS'2027-05-20';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''2027-05-20'' at line 1
+mysql> UPDATE EMPLOYEE SET DOJ ='2026-09-04' WHERE DOJ IS'2027-05-20';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''2027-05-20'' at line 1
+mysql> ^C
+mysql> DELETE FROM EMPLOYEE WHERE FIRSTNAME = 'BHAGYA';
+Query OK, 1 row affected (0.02 sec)
+
+mysql> SLECT*FROM EMPLOYEE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SLECT*FROM EMPLOYEE' at line 1
+mysql> SELECT*FROM EMPLOYEE;
++-----------+----------+------+------------+---------+----------+
+| FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT     |
++-----------+----------+------+------------+---------+----------+
+| BHAVYA    | SRI      |   28 | 2025-04-19 | HYD     | TRAINING |
+| APPARAO   | KUMAR    
+|   20 | 2026-04-19 | VZG     | TRAINING |
+| VENKATA   | APPARAO  |   25 | 2027-05-20 | K.J.P   | COMPUTER |
+| HARI      | KRISHNA  |   25 | 2027-05-20 | K.J.P   | COMPUTER |
+| NULL      | HARI     |   50 | 2027-05-20 | NULL    | COMPUTER |
++-----------+----------+------+------------+---------+----------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+========================
+ CREATE TABLE employees (
+    ->     emp_id INT PRIMARY KEY,
+    ->     emp_name VARCHAR(100),
+    ->     department VARCHAR(50),
+    ->     job_role VARCHAR(50),
+    ->     salary DECIMAL(10,2),
+    ->     joining_date DATE,
+    ->     city VARCHAR(50)
+    -> );
+ERROR 1046 (3D000): No database selected
+mysql>
+mysql>
+mysql> INSERT INTO employees
+    -> (emp_id, emp_name, department, job_role, salary, joining_date, city)
+    -> VALUES
+    -> (101, 'Ravi Kumar', 'IT', 'Developer', 45000, '2023-01-15', 'Vizag'),
+    -> (102, 'Priya Sharma', 'HR', 'HR Manager', 55000, '2022-06-20', 'Hyderabad'),
+    -> (103, 'Kiran Reddy', 'IT', 'Tester', 40000, '2023-03-10', 'Vizag'),
+    -> (104, 'Sneha Rao', 'Finance', 'Accountant', 48000, '2021-11-25', 'Chennai'),
+    -> (105, 'Arun Kumar', 'IT', 'Developer', 60000, '2020-08-18', 'Bangalore'),
+    -> (106, 'Divya Reddy', 'HR', 'Recruiter', 35000, '2024-01-05', 'Vizag'),
+    -> (107, 'Suresh Babu', 'Sales', 'Executive', 42000, '2022-09-12', 'Hyderabad'),
+    -> (108, 'Anjali Devi', 'IT', 'Developer', 70000, '2019-05-30', 'Chennai'),
+    -> (109, 'Mahesh Kumar', 'Sales', 'Manager', 65000, '2020-02-14', 'Bangalore'),
+    -> (110, 'Lakshmi Rao', 'Finance', 'Analyst', 52000, '2023-07-22', 'Hyderabad');
+ERROR 1046 (3D000): No database selected
+mysql> use pfs6;
+Database changed
+mysql> CREATE TABLE employees (
+    ->     emp_id INT PRIMARY KEY,
+    ->     emp_name VARCHAR(100),
+    ->     department VARCHAR(50),
+    ->     job_role VARCHAR(50),
+    ->     salary DECIMAL(10,2),
+    ->     joining_date DATE,
+    ->     city VARCHAR(50)
+    -> );
+ERROR 1050 (42S01): Table 'employees' already exists
+mysql>
+mysql>
+mysql> INSERT INTO employees
+    -> (emp_id, emp_name, department, job_role, salary, joining_date, city)
+    -> VALUES
+    -> (101, 'Ravi Kumar', 'IT', 'Developer', 45000, '2023-01-15', 'Vizag'),
+    -> (102, 'Priya Sharma', 'HR', 'HR Manager', 55000, '2022-06-20', 'Hyderabad'),
+    -> (103, 'Kiran Reddy', 'IT', 'Tester', 40000, '2023-03-10', 'Vizag'),
+    -> (104, 'Sneha Rao', 'Finance', 'Accountant', 48000, '2021-11-25', 'Chennai'),
+    -> (105, 'Arun Kumar', 'IT', 'Developer', 60000, '2020-08-18', 'Bangalore'),
+    -> (106, 'Divya Reddy', 'HR', 'Recruiter', 35000, '2024-01-05', 'Vizag'),
+    -> (107, 'Suresh Babu', 'Sales', 'Executive', 42000, '2022-09-12', 'Hyderabad'),
+    -> (108, 'Anjali Devi', 'IT', 'Developer', 70000, '2019-05-30', 'Chennai'),
+    -> (109, 'Mahesh Kumar', 'Sales', 'Manager', 65000, '2020-02-14', 'Bangalore'),
+    -> (110, 'Lakshmi Rao', 'Finance', 'Analyst', 52000, '2023-07-22', 'Hyderabad');
+ERROR 1062 (23000): Duplicate entry '101' for key 'employees.PRIMARY'
+mysql> ^C
+mysql> use pfs6;
+Database changed
+mysql> CREATE TABLE employees (
+    ->     emp_id INT PRIMARY KEY,
+    ->     emp_name VARCHAR(100),
+    ->     department VARCHAR(50),
+    ->     job_role VARCHAR(50),
+    ->     salary DECIMAL(10,2),
+    ->     joining_date DATE,
+    ->     city VARCHAR(50)
+    -> );
+ERROR 1050 (42S01): Table 'employees' already exists
+mysql>
+mysql>
+mysql> INSERT INTO employees
+    -> (emp_id, emp_name, department, job_role, salary, joining_date, city)
+    -> VALUES
+    -> (101, 'Ravi Kumar', 'IT', 'Developer', 45000, '2023-01-15', 'Vizag'),
+    -> (102, 'Priya Sharma', 'HR', 'HR Manager', 55000, '2022-06-20', 'Hyderabad'),
+    -> (103, 'Kiran Reddy', 'IT', 'Tester', 40000, '2023-03-10', 'Vizag'),
+    -> (104, 'Sneha Rao', 'Finance', 'Accountant', 48000, '2021-11-25', 'Chennai'),
+    -> (105, 'Arun Kumar', 'IT', 'Developer', 60000, '2020-08-18', 'Bangalore'),
+    -> (106, 'Divya Reddy', 'HR', 'Recruiter', 35000, '2024-01-05', 'Vizag'),
+    -> (107, 'Suresh Babu', 'Sales', 'Executive', 42000, '2022-09-12', 'Hyderabad'),
+    -> (108, 'Anjali Devi', 'IT', 'Developer', 70000, '2019-05-30', 'Chennai'),
+    -> (109, 'Mahesh Kumar', 'Sales', 'Manager', 65000, '2020-02-14', 'Bangalore'),
+    -> (110, 'Lakshmi Rao', 'Finance', 'Analyst', 52000, '2023-07-22', 'Hyderabad');
+ERROR 1062 (23000): Duplicate entry '101' for key 'employees.PRIMARY'
+mysql> ^C
+mysql> CREATE TABLE employees (
+    ->     emp_id INT PRIMARY KEY,
+    ->     emp_name VARCHAR(100),
+    ->     department VARCHAR(50),
+    ->     job_role VARCHAR(50),
+    ->     salary DECIMAL(10,2),
+    ->     joining_date DATE,
+    ->     city VARCHAR(50)
+    -> );
+ERROR 1050 (42S01): Table 'employees' already exists
+mysql>
+mysql>
+mysql> INSERT INTO employees
+    -> (emp_id, emp_name, department, job_role, salary, joining_date, city)
+    -> VALUES
+    -> (101, 'Ravi Kumar', 'IT', 'Developer', 45000, '2023-01-15', 'Vizag'),
+    -> (102, 'Priya Sharma', 'HR', 'HR Manager', 55000, '2022-06-20', 'Hyderabad'),
+    -> (103, 'Kiran Reddy', 'IT', 'Tester', 40000, '2023-03-10', 'Vizag'),
+    -> (104, 'Sneha Rao', 'Finance', 'Accountant', 48000, '2021-11-25', 'Chennai'),
+    -> (105, 'Arun Kumar', 'IT', 'Developer', 60000, '2020-08-18', 'Bangalore'),
+    -> (106, 'Divya Reddy', 'HR', 'Recruiter', 35000, '2024-01-05', 'Vizag'),
+    -> (107, 'Suresh Babu', 'Sales', 'Executive', 42000, '2022-09-12', 'Hyderabad'),
+    -> (108, 'Anjali Devi', 'IT', 'Developer', 70000, '2019-05-30', 'Chennai'),
+    -> (109, 'Mahesh Kumar', 'Sales', 'Manager', 65000, '2020-02-14', 'Bangalore'),
+    -> (110, 'Lakshmi Rao', 'Finance', 'Analyst', 52000, '2023-07-22', 'Hyderabad');
+ERROR 1062 (23000): Duplicate entry '101' for key 'employees.PRIMARY'
+mysql>  drop table employees;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE employees (
+    ->     emp_id INT PRIMARY KEY,
+    ->     emp_name VARCHAR(100),
+    ->     department VARCHAR(50),
+    ->     job_role VARCHAR(50),
+    ->     salary DECIMAL(10,2),
+    ->     joining_date DATE,
+    ->     city VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql>
+mysql>
+mysql> INSERT INTO employees
+    -> (emp_id, emp_name, department, job_role, salary, joining_date, city)
+    -> VALUES
+    -> (101, 'Ravi Kumar', 'IT', 'Developer', 45000, '2023-01-15', 'Vizag'),
+    -> (102, 'Priya Sharma', 'HR', 'HR Manager', 55000, '2022-06-20', 'Hyderabad'),
+    -> (103, 'Kiran Reddy', 'IT', 'Tester', 40000, '2023-03-10', 'Vizag'),
+    -> (104, 'Sneha Rao', 'Finance', 'Accountant', 48000, '2021-11-25', 'Chennai'),
+    -> (105, 'Arun Kumar', 'IT', 'Developer', 60000, '2020-08-18', 'Bangalore'),
+    -> (106, 'Divya Reddy', 'HR', 'Recruiter', 35000, '2024-01-05', 'Vizag'),
+    -> (107, 'Suresh Babu', 'Sales', 'Executive', 42000, '2022-09-12', 'Hyderabad'),
+    -> (108, 'Anjali Devi', 'IT', 'Developer', 70000, '2019-05-30', 'Chennai'),
+    -> (109, 'Mahesh Kumar', 'Sales', 'Manager', 65000, '2020-02-14', 'Bangalore'),
+    -> (110, 'Lakshmi Rao', 'Finance', 'Analyst', 52000, '2023-07-22', 'Hyderabad');
+Query OK, 10 rows affected (0.02 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select*from employees;
++--------+--------------+------------+------------+----------+--------------+-----------+
+| emp_id | emp_name     | department | job_role   | salary   | joining_date | city      |
++--------+--------------+------------+------------+----------+--------------+-----------+
+|    101 | Ravi Kumar   | IT         | Developer  | 45000.00 | 2023-01-15   | Vizag     |
+|    102 | Priya Sharma | HR         | HR Manager | 55000.00 | 2022-06-20   | Hyderabad |
+|    103 | Kiran Reddy  | IT         | Tester     | 40000.00 | 2023-03-10   | Vizag     |
+|    104 | Sneha Rao    | Finance    | Accountant | 48000.00 | 2021-11-25   | Chennai   |
+|    105 | Arun Kumar   | IT         | Developer  | 60000.00 | 2020-08-18   | Bangalore |
+|    106 | Divya Reddy  | HR         | Recruiter  | 35000.00 | 2024-01-05   | Vizag     |
+|    107 | Suresh Babu  | Sales      | Executive  | 42000.00 | 2022-09-12   | Hyderabad |
+|    108 | Anjali Devi  | IT         | Developer  | 70000.00 | 2019-05-30   | Chennai   |
+|    109 | Mahesh Kumar | Sales      | Manager    | 65000.00 | 2020-02-14   | Bangalore |
+|    110 | Lakshmi Rao  | Finance    | Analyst    | 52000.00 | 2023-07-22   | Hyderabad |
++--------+--------------+------------+------------+----------+--------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> alter table employees add email varchar(100);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table employees add phone datatype(15);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatype(15)' at line 1
+mysql> alter table employees add phone varchar(15);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table employees modify city varchar(100);
+Query OK, 10 rows affected (0.06 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> alter table employee change job_role destination varchar(100);
+ERROR 1146 (42S02): Table 'pfs6.employee' doesn't exist
+mysql> alter table employees change job_role destination varchar(100);
+Query OK, 10 rows affected (0.06 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> alter table employees drop column phone;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update table employees set salary=5000 where ravi kumar salary;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table employees set salary=5000 where ravi kumar salary' at line 1
+mysql> update table employees set salary=5000 where ravi kumar salary=4500;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table employees set salary=5000 where ravi kumar salary=4500' at line 1
+mysql> update table employees set salary=5000 where ravi kumar salary=4500.00;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table employees set salary=5000 where ravi kumar salary=4500.00' at line 1
+mysql> update table employees set salary=50000 where Ravi kumar salary=45000.00;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table employees set salary=50000 where Ravi kumar salary=45000.00' at line 1
+mysql> update employees set salary=50000 where Ravi kumar salary is 45000.00;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'kumar salary is 45000.00' at line 1
+mysql> update employees set salary=50000 where emp_name=Ravi kumar;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'kumar' at line 1
+mysql> update employees set salary=50000 where emp_name='Ravi kumar';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>
+
+mysql>
